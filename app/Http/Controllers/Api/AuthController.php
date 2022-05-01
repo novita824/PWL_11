@@ -17,6 +17,7 @@ use Throwable;
 class AuthController extends Controller
 {
     use ApiResponse;
+    
     public function register(RegisterRequest $request)
     {
         $validated = $request->validated();
@@ -38,7 +39,7 @@ class AuthController extends Controller
         $validated = $request->validated();
 
         if(!Auth::attempt($validated)){
-            return $this->apiError('Credetials not match',Response::HTTP_UNAUTHORIZED);
+            return $this->apiError('Credentials not match',Response::HTTP_UNAUTHORIZED);
         }
 
         $user = User::where('email', $validated['email'])->first();
